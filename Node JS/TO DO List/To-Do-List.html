@@ -1,0 +1,43 @@
+<HTML>
+    <head>
+        <script>
+            var todo = []
+            document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelector('#todosubmit').onclick = () => {
+                        value = document.querySelector('#todo').value
+                        todo.push(value)
+                        content = "<h3> The Pending Tasks</h3>"
+                        todo.forEach((element) => {content = content + '<input type = "checkbox" name = "todoli" value = '+ element+'>' + element + "</input><br>"})
+                        document.querySelector('#list').innerHTML = content
+                        document.querySelector('#todo').value = ""
+                        document.querySelector('#deletebutton').innerHTML = '<br><button id="deletelist"> Delete </button><br><br>'
+                    }
+
+                    document.querySelector('#deletebutton').onclick = () => {
+                        var items = document.getElementsByName('todoli');
+                        content = "<h3> The Pending Tasks</h3>"
+                        for (var i = 0; i < items.length; i++) {
+                            if (items[i].type == 'checkbox' && items[i].checked == true) {
+                                var index = todo.indexOf(items[i].value);
+                                if (index > -1) {
+                                    todo.splice(index, 1);
+                                }
+                            }
+                        }
+                        todo.forEach((element) => { content = content + '<input type = "checkbox" name = "todoli" value = ' + element + '>' + element + "</input><br>" })
+                        document.querySelector('#list').innerHTML = content
+                    }
+            })
+        </script>
+    </head>
+
+    <body>
+        <ul id = "list">
+        </ul>
+        <div id = "deletebutton"></div>
+        <textarea id="todo" placeholder="Plase enter pending works" rows="2" cols="40"></textarea>
+        <br>
+        <br>
+        <button id="todosubmit"> submit </button>
+    </body>
+</HTML>
